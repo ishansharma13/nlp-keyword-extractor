@@ -16,12 +16,12 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
   },
  
   '& .MuiFilledInput-root': {
-    backgroundColor: '#f5f5f5' ,
+    backgroundColor: 'transparent' ,
     transition: theme.transitions.create([
       'background-color',
     ]),
     '&:hover': {
-      backgroundColor: 'transparent' ,
+      backgroundColor: '#f5f5f5' ,
     },
     '&.Mui-focused fieldset': {
       borderColor: '#932439',
@@ -29,7 +29,7 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
   },
 }));
 const StyledPaper = styled(Paper)(({ theme }) => ({
-  backgroundColor: 'rgba(255,255,255, .9)'
+  backgroundColor: 'rgba(255,255,255, .75)'
 }));
 
 const StyledInputLabel = styled(InputLabel)(({ theme })=>({
@@ -42,9 +42,10 @@ const StyledInputLabel = styled(InputLabel)(({ theme })=>({
 // }
 }));
 const StyledSelect = styled(Select)(({ theme }) => ({
-  backgroundColor: '#f5f5f5' ,
-  '&:hover': {
-    backgroundColor: 'transparent' ,
+  backgroundColor: 'transparent' ,
+  
+  ':hover': {
+    backgroundColor: '#f5f5f5' ,  
   },
   ':after': {
     borderBottomColor: '#932439',
@@ -61,15 +62,19 @@ export default function RecipeReviewCard() {
 
   return (
     <StyledPaper sx={{ p:5,
-      width: 400,
-      height: 430, }}>
+      width: '40vw',
+      height: '60vh',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
+       }}>
       <form>
       <Stack
       direction="column"
       justifyContent="center"
       alignItems="stretch" 
       spacing={3}>
-        <Typography variant="h5" component="h5">
+        <Typography variant="h5" component="h5" sx={{fontSize: '1.25em'}}>
            Key Phrase Detection
         </Typography>
       <FormControl>
