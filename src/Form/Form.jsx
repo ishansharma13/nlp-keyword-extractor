@@ -63,7 +63,7 @@ export default function RecipeReviewCard() {
   return (
     <StyledPaper sx={{ p:5,
       width: '40vw',
-      height: '60vh',
+      height: '67.5vh',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center'
