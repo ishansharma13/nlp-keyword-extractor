@@ -1,34 +1,79 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import Paper from '@mui/material/Paper';
-import { FormControl,TextField } from '@mui/material';
+import { FormControl,TextField,Stack,MenuItem,Select,InputLabel,Button,Paper,styled,Typography } from '@mui/material';
+const StyledButton = styled(Button)(({ theme }) => ({
+  backgroundColor: '#932439',
+  "&:hover":{
+    backgroundColor: '#781d2e'
+  },
+}));
 
+const StyledTextField = styled(TextField)(({ theme }) => ({
+  '& label.Mui-focused': {
+    color: '#932439',
+  },
+  '& .MuiFilledInput-underline:after': {
+    borderBottomColor: '#932439',
+  },
+ 
+  '& .MuiFilledInput-root': {
+    backgroundColor: '#f5f5f5' ,
+    transition: theme.transitions.create([
+      'background-color',
+    ]),
+    '&:hover': {
+      backgroundColor: 'transparent' ,
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: '#932439',
+    },
+  },
+}));
+const StyledPaper = styled(Paper)(({ theme }) => ({
+  backgroundColor: 'rgba(255,255,255, .9)'
+}));
+
+const StyledInputLabel = styled(InputLabel)(({ theme })=>({
+// '& .MuiInputLabel-filled-root':{
+  
+  '&.Mui-focused': {
+    color: '#932439',
+  },
+  
+// }
+}));
+const StyledSelect = styled(Select)(({ theme }) => ({
+  backgroundColor: '#f5f5f5' ,
+  '&:hover': {
+    backgroundColor: 'transparent' ,
+  },
+  ':after': {
+    borderBottomColor: '#932439',
+  },
+}));
 export default function RecipeReviewCard() {
   const valueRef = React.useRef('');
-  
+  const [similarityMeasure, setsimilarityMeasure] = React.useState('');
+
+  const handleChange = (event) => {
+    setsimilarityMeasure(event.target.value);
+  };
 
 
   return (
-    <Paper sx={{ p:5,
+    <StyledPaper sx={{ p:5,
       width: 400,
-      height: 500, }}>
+      height: 430, }}>
       <form>
-        <FormControl fullWidth>
-        <TextField
+      <Stack
+      direction="column"
+      justifyContent="center"
+      alignItems="stretch" 
+      spacing={3}>
+        <Typography variant="h5" component="h5">
+           Key Phrase Detection
+        </Typography>
+      <FormControl>
+        <StyledTextField
           label="Document"
           multiline
           rows={4}
@@ -38,8 +83,30 @@ export default function RecipeReviewCard() {
          
         />
         </FormControl>
+        <FormControl >
+        <StyledTextField  variant="filled" label="Keyword Length" defaultValue={1} inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} />
+        </FormControl>
+
+        <FormControl >
+        <StyledInputLabel variant="filled" id="similarity-select-label">Similarity Measures</StyledInputLabel>
+        <StyledSelect
+          labelId="similarity-select-labell"
+          id="similarity-select"
+          value={similarityMeasure}
+          label="Similarity Measure"
+          onChange={handleChange}
+          variant="filled"
+        >
+          <MenuItem value='cs'>Cosine Similarity</MenuItem>
+          <MenuItem value='mss'>Max Sum Similarity</MenuItem>
+          <MenuItem value='mmr'>Maximal Marginal Relevance</MenuItem>
+        </StyledSelect>
+      </FormControl>
+      <StyledButton variant="contained" >Submit</StyledButton>
+      </Stack>
+      
       </form>
-    </Paper>
+    </StyledPaper>
   );
 }
 
