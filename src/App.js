@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import RecipeReviewCard from './Form/Form'
 function App() {
